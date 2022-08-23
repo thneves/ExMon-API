@@ -4,6 +4,9 @@ defmodule ExMonApiWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+  # a plug is  part of code that change a request and modifiest it before the controller,
+  # like a middleware but only in the begin.
+  # all routes here only accepets json
 
   scope "/api", ExMonApiWeb do
     pipe_through :api
@@ -23,6 +26,12 @@ defmodule ExMonApiWeb.Router do
       pipe_through [:fetch_session, :protect_from_forgery]
 
       live_dashboard "/dashboard", metrics: ExMonApiWeb.Telemetry
+    end
+
+    scope "/", ExMonApiWeb do
+      pipe_through :api
+
+      get "/", WelcomeController, :index
     end
   end
 
