@@ -9,6 +9,10 @@ defmodule ExMonApiWeb.TrainersController do
     |> handle_response(conn)
   end
 
+  def fetch_trainer() do
+
+  end
+
   defp handle_response({:ok, trainer}, conn) do
     conn
     |> put_status(:created)
