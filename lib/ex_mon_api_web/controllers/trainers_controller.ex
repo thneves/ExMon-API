@@ -1,7 +1,7 @@
 defmodule ExMonApiWeb.TrainersController do
   use ExMonApiWeb, :controller
 
-  action_fallback ExMonApi.FallbackController
+  action_fallback ExMonApiWeb.FallbackController
 
   def create(conn, params) do #receives action params, call create_trainer and handle the response
     params
