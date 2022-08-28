@@ -9,9 +9,19 @@ defmodule ExMonApiWeb.TrainersController do
     |> handle_response(conn)
   end
 
-  def fetch_trainer() do
-
+  def delete(conn, %{id: id}) do #receives action params, call create_trainer and handle the response
+    id
+    |> ExMonApi.delete_trainer()
+    |> handle_delete(conn)
   end
+
+  defp handle_delete({:ok, _trainer}, conn) do
+    conn
+    |> put_status(:no_content)
+    |> text("")
+  end
+
+  defp handle_delete({:error, _reason} = error, _conn), do: error
 
   defp handle_response({:ok, trainer}, conn) do
     conn
